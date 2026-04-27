@@ -1,0 +1,10 @@
+services:
+  frontend:
+    image: idb-jovem-frontend:latest
+    container_name: idb-jovem-frontend
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    restart: unless-stopped
