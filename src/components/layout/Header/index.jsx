@@ -4,7 +4,7 @@ import NavLinks from "./NavLinks";
 
 export default function Header() {
   return (
-    <header className="fixed top-0 left-0 w-full z-50 flex justify-center pt-6">
+    <header className="fixed top-0 left-0 w-full z-50 flex justify-center">
       <div
         className="
           w-[100%]
@@ -22,8 +22,8 @@ export default function Header() {
           to="/"
           className="
             pl-10
-            font-logo
-            text-primary
+            font-['Faster_One']
+            text-[#FF6D2C]
             text-[48px]
             leading-[18px]
             shrink-0
@@ -63,7 +63,7 @@ export default function Header() {
               gap-4
             "
           >
-            <Search size={20} className="text-primary" />
+            <Search size={20} className="text-[#FF6D2C]" />
 
             <input
               type="text"
@@ -81,7 +81,7 @@ export default function Header() {
             <XCircle
               size={24}
               className="
-                text-primary
+                text-[#FF6D2C]
                 cursor-pointer
                 hover:scale-110
                 transition-all
@@ -100,7 +100,7 @@ export default function Header() {
               items-center
               justify-center
               gap-2
-              hover:bg-primary
+              hover:bg-[#FF6D2C]
               group
               transition-all
               duration-300
@@ -108,7 +108,7 @@ export default function Header() {
           >
             <span
               className="
-                text-primary
+                text-[#FF6D2C]
                 text-[14px]
                 font-bold
                 group-hover:text-white
@@ -121,7 +121,7 @@ export default function Header() {
             <MapPin
               size={21}
               className="
-                text-primary
+                text-[#FF6D2C]
                 group-hover:text-white
                 transition-all
               "
@@ -130,7 +130,7 @@ export default function Header() {
         </div>
 
         <div className="pr-10">
-            <NavLinks />
+          <NavLinks />
         </div>
       </div>
     </header>
