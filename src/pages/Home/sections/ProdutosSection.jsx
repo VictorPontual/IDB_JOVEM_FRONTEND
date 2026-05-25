@@ -1,26 +1,37 @@
 import { Link } from "react-router-dom";
+import produto1Img from "../../../assets/images/produto1.png";
+import produto2Img from "../../../assets/images/produto2.png";
+import produto3Img from "../../../assets/images/produto3.png";
 
-function ProductCard({ product }) {
-  const isFeatured = product.featured;
+const mockProducts = [
+  { id: 1, name: "Camiseta igreja", description: "Descrição do produto", image: produto1Img },
+  { id: 2, name: "Caneca", description: "Descrição do produto", image: produto2Img },
+  { id: 3, name: "Brinco cruz", description: "Descrição do produto", image: produto3Img },
+  { id: 4, name: "Caneca", description: "Descrição do produto", image: produto2Img },
+  { id: 5, name: "Brinco cruz", description: "Descrição do produto", image: produto3Img },
+  { id: 6, name: "Camiseta igreja", description: "Descrição do produto", image: produto1Img },
+];
+
+function ProductCard({ product, index }) {
+  const isOrange = index % 2 !== 0;
 
   return (
     <div
-      className={`flex flex-col items-center rounded-sm overflow-hidden shadow-md transition-transform hover:-translate-y-1 hover:shadow-xl ${
-        isFeatured ? "bg-orange-500 text-white" : "bg-white text-neutral-800"
-      }`}
+      className={`flex flex-col rounded-2xl overflow-hidden p-4 md:p-5 ${isOrange ? "bg-[#FF6D2C]" : "bg-[#FDF3EA]"
+        }`}
     >
-      <div className="w-full h-44 flex items-center justify-center p-4 bg-white/10">
+      <div className="w-full bg-white flex items-center justify-center p-4 md:p-6 h-[220px] md:h-[260px] rounded-xl shadow-sm">
         <img
           src={product.image}
           alt={product.name}
-          className="h-36 w-auto object-contain drop-shadow-md"
+          className="h-full w-auto object-contain drop-shadow-sm mix-blend-multiply"
         />
       </div>
-      <div className="w-full px-4 py-3 text-center">
-        <p className={`text-sm font-semibold ${isFeatured ? "text-white" : "text-neutral-700"}`}>
+      <div className="w-full pt-6 pb-2 text-center">
+        <p className="text-[1.1rem] md:text-xl font-bold text-neutral-800">
           {product.name}
         </p>
-        <p className={`text-xs mt-0.5 ${isFeatured ? "text-white/80" : "text-neutral-400"}`}>
+        <p className="text-xs md:text-sm font-medium mt-2 text-neutral-600">
           {product.description}
         </p>
       </div>
@@ -29,38 +40,32 @@ function ProductCard({ product }) {
 }
 
 export default function ProdutosSection({ products = [] }) {
+  // Ignoramos a prop e usamos o mock do design
+  const displayProducts = mockProducts;
+
   return (
-    <section id="produtos" className="w-full bg-white py-16 md:py-24">
-      <div className="w-full max-w-6xl mx-auto px-4">
+    <section id="produtos" className="w-full bg-[#FFFFFF] py-16 md:py-24">
+      <div className="w-full max-w-[1200px] mx-auto px-4 md:px-8">
         {/* Cabeçalho */}
-        <div className="text-center mb-10">
+        <div className="text-center mb-14">
           <h2
-            className="font-bold text-neutral-900"
-            style={{ fontSize: "clamp(1.6rem, 4vw, 2.4rem)" }}
+            className="font-black text-[#2B2B2B] leading-tight"
+            style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)" }}
           >
             Conheça nossos produtos
           </h2>
-          <p className="text-orange-500 font-handwriting mt-1" style={{ fontSize: "clamp(1.2rem, 3vw, 1.6rem)" }}>
-            à venda durante os eventos!
+          <p className="text-[#FF6D2C] font-handwriting mt-1" style={{ fontSize: "clamp(2.5rem, 4vw, 3.5rem)" }}>
+            A venda durante os eventos!
           </p>
         </div>
 
         {/* Grid de produtos */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-4 md:gap-6">
-          {products.slice(0, 6).map((product) => (
-            <ProductCard key={product.id} product={product} />
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
+          {displayProducts.map((product, index) => (
+            <ProductCard key={index} product={product} index={index} />
           ))}
         </div>
 
-        {/* CTA */}
-        <div className="mt-10 text-center">
-          <Link
-            to="/produtos"
-            className="inline-block border-2 border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white transition-colors font-bold px-8 py-3 rounded-sm uppercase tracking-wider text-sm"
-          >
-            Ver todos os produtos
-          </Link>
-        </div>
       </div>
     </section>
   );

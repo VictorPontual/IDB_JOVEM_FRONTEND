@@ -1,0 +1,14 @@
+/**
+ * Estilos compartilhados do componente Modal.
+ */
+
+export const MODAL_OVERLAY = "fixed inset-0 z-50 flex items-center justify-center p-4";
+export const MODAL_BACKDROP = "absolute inset-0 bg-black/40 backdrop-blur-sm animate-fade-in";
+export const MODAL_CONTENT = "relative z-10 animate-scale-in";
+export const MODAL_CARD = "bg-white rounded-2xl p-8 sm:p-10 shadow-xl max-w-sm w-full text-center";
+export const MODAL_ICON_WRAPPER = "flex justify-center mb-5";
+export const MODAL_ICON_CIRCLE = "w-16 h-16 rounded-full border-[3px] flex items-center justify-center";
+export const MODAL_TITLE = "text-lg font-bold text-[#1E1E1E] leading-snug mb-8";
+export const MODAL_ACTIONS = "flex justify-center gap-6";
+export const MODAL_BTN_CONFIRM = "px-10 py-3 rounded-lg text-sm font-bold text-white bg-green-600 hover:bg-green-700 transition-colors shadow-sm min-w-[120px]";
+export const MODAL_BTN_CANCEL = "px-10 py-3 rounded-lg text-sm font-bold text-white bg-red-500 hover:bg-red-600 transition-colors shadow-sm min-w-[120px]";

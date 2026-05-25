@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import bgGif from "../../../assets/gifs/IDB_Jovem.gif";
 
 const CountdownBox = ({ value, label }) => (
   <div className="flex flex-col items-center">
@@ -21,7 +22,7 @@ export default function HeroSection({ countdown, nextEvent }) {
       {/* Background GIF / Video - substitua pelo seu gif real */}
       <div className="absolute inset-0 z-0">
         <img
-          src="/images/hero-bg.gif"
+          src={bgGif}
           alt=""
           className="w-full h-full object-cover opacity-60"
           aria-hidden="true"

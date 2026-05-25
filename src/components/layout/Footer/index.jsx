@@ -1,124 +1,69 @@
-import { Link, useNavigate, useLocation } from "react-router-dom";
-import { Mail, MapPin } from "lucide-react";
-import { FaInstagram, FaYoutube } from "react-icons/fa6";
-
-const footerLinks = [
-  { label: "Eventos", path: "/eventos" },
-  { label: "Galeria de fotos", path: "/galeria" },
-  { label: "Produtos", path: "/#produtos" },
-  { label: "Contato", path: "/#contato" },
-];
-
-const socialLinks = [
-  { icon: FaInstagram, label: "Instagram", href: "https://instagram.com/idbjovem" },
-  { icon: FaYoutube, label: "YouTube", href: "https://youtube.com/@idbjovem" },
-  { icon: Mail, label: "Email", href: "mailto:contato@idbjovem.com" },
-];
+import { Link } from "react-router-dom";
+import { Mail } from "lucide-react";
+import { FaInstagram, FaFacebookF } from "react-icons/fa6";
 
 export default function Footer() {
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  const handleClick = (e, link) => {
-    if (link.path.startsWith("/#")) {
-      e.preventDefault();
-      const sectionId = link.path.replace("/#", "");
-
-      if (location.pathname === "/") {
-        // Already on Home — just scroll
-        const el = document.getElementById(sectionId);
-        if (el) el.scrollIntoView({ behavior: "smooth" });
-      } else {
-        // Navigate to Home then scroll
-        navigate("/");
-        setTimeout(() => {
-          const el = document.getElementById(sectionId);
-          if (el) el.scrollIntoView({ behavior: "smooth" });
-        }, 100);
-      }
-    }
-  };
-
   return (
-    <footer id="contato" className="w-full bg-[#1E1E1E] text-white">
-      {/* Conteúdo principal */}
-      <div className="w-full max-w-6xl mx-auto px-4 py-12 md:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-8">
-          {/* Logo e descrição */}
-          <div className="flex flex-col gap-4">
-            <Link to="/" className="font-['Faster_One'] text-[#FF6D2C] text-[36px] leading-none inline-block hover:scale-105 transition-transform">
-              IDB Jovem
-            </Link>
-            <p className="text-white/60 text-sm leading-relaxed max-w-[280px]">
-              Um movimento de jovens feito para quem busca viver a fé de forma viva e com propósito.
+    <footer id="contato" className="w-full bg-white text-neutral-800 border-t border-neutral-200">
+      <div className="w-full max-w-[1400px] mx-auto px-4 py-16 md:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-center">
+          
+          {/* Esquerda - Contato */}
+          <div className="flex flex-col gap-6 md:pl-10">
+            <h3 className="text-[#FF7F11] font-bold tracking-wide uppercase text-2xl">
+              ENTRE EM CONTATO
+            </h3>
+            <ul className="flex flex-col gap-4">
+              <li>
+                <a href="mailto:contato@idbjovem.com" className="flex items-center gap-3 text-neutral-700 hover:text-[#FF7F11] transition-colors font-semibold text-sm">
+                  <div className="w-6 h-6 flex items-center justify-center border-2 border-neutral-800 rounded-sm">
+                    <Mail size={14} className="text-neutral-800" strokeWidth={2.5} />
+                  </div>
+                  <span>contato@idbjovem.com</span>
+                </a>
+              </li>
+              <li>
+                <a href="https://instagram.com/idbjovemoficial" target="_blank" rel="noreferrer" className="flex items-center gap-3 text-neutral-700 hover:text-[#FF7F11] transition-colors font-semibold text-sm">
+                  <div className="w-6 h-6 flex items-center justify-center border-2 border-neutral-800 rounded-sm">
+                    <FaInstagram size={14} className="text-neutral-800" />
+                  </div>
+                  <span>@idbjovemoficial</span>
+                </a>
+              </li>
+              <li>
+                <a href="https://facebook.com/idbjovemoficial" target="_blank" rel="noreferrer" className="flex items-center gap-3 text-neutral-700 hover:text-[#FF7F11] transition-colors font-semibold text-sm">
+                  <div className="w-6 h-6 flex items-center justify-center border-2 border-neutral-800 rounded-sm">
+                    <FaFacebookF size={14} className="text-neutral-800" />
+                  </div>
+                  <span>@idbjovemoficial</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Centro - Logo e Missão */}
+          <div className="flex items-center gap-5 justify-center">
+            <img src="/logo.svg" alt="IDB Jovem" className="w-[70px] h-auto shrink-0" />
+            <p className="text-neutral-600 text-sm leading-relaxed max-w-[280px] font-bold text-left">
+              Inspirar e capacitar as novas gerações a viverem o propósito cristão com autenticidade, unindo fé, protagonismo e serviço para transformar a sociedade.
             </p>
-            {/* Redes sociais */}
-            <div className="flex items-center gap-3 mt-2">
-              {socialLinks.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-9 h-9 rounded-full bg-white/10 hover:bg-orange-500 flex items-center justify-center transition-all duration-300 hover:scale-110"
-                  aria-label={social.label}
-                >
-                  <social.icon size={16} className="text-white" />
-                </a>
-              ))}
-            </div>
           </div>
 
-          {/* Links rápidos */}
-          <div>
-            <h4 className="text-white font-bold text-sm uppercase tracking-widest mb-4">
-              Links rápidos
-            </h4>
-            <ul className="flex flex-col gap-2.5">
-              {footerLinks.map((link) => (
-                <li key={link.path}>
-                  <Link
-                    to={link.path.startsWith("/#") ? "/" : link.path}
-                    onClick={(e) => handleClick(e, link)}
-                    className="text-white/60 hover:text-orange-500 transition-colors text-sm font-medium"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+          {/* Direita - Botões */}
+          <div className="flex flex-col items-start md:items-end gap-6 md:pr-10">
+            <Link
+              to="/login"
+              className="px-10 py-2 border-[2.5px] border-[#FF7F11] text-[#FF7F11] bg-white font-bold rounded-2xl hover:bg-orange-50 transition-all shadow-[4px_4px_0_#2B2B2B] active:translate-y-1 active:shadow-none"
+            >
+              Login
+            </Link>
+            <Link
+              to="/voluntarios"
+              className="px-6 py-3 bg-[#FF7F11] text-white font-bold rounded-2xl hover:bg-[#E56A00] transition-all shadow-[4px_4px_0_#2B2B2B] active:translate-y-1 active:shadow-none uppercase tracking-wide text-sm border-[2.5px] border-[#2B2B2B]"
+            >
+              VIRAR VOLUNTÁRIO
+            </Link>
           </div>
-
-          {/* Contato */}
-          <div>
-            <h4 className="text-white font-bold text-sm uppercase tracking-widest mb-4">
-              Contato
-            </h4>
-            <ul className="flex flex-col gap-3">
-              <li className="flex items-start gap-2 text-white/60 text-sm">
-                <MapPin size={16} className="mt-0.5 shrink-0 text-orange-500" />
-                <span>São Paulo, SP — Brasil</span>
-              </li>
-              <li className="flex items-start gap-2 text-white/60 text-sm">
-                <Mail size={16} className="mt-0.5 shrink-0 text-orange-500" />
-                <a href="mailto:contato@idbjovem.com" className="hover:text-orange-500 transition-colors">
-                  contato@idbjovem.com
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      {/* Barra inferior */}
-      <div className="w-full border-t border-white/10">
-        <div className="w-full max-w-6xl mx-auto px-4 py-5 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-white/40 text-xs">
-            © {new Date().getFullYear()} IDB Jovem. Todos os direitos reservados.
-          </p>
-          <p className="text-white/30 text-xs">
-            Feito com ❤️ para a glória de Deus
-          </p>
         </div>
       </div>
     </footer>

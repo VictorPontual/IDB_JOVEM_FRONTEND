@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import processoImg from "../../../assets/images/processo.png";
 
 const steps = [
   {
@@ -12,19 +13,19 @@ const steps = [
     number: "02",
     title: "Inscrição",
     description:
-      "Preencha o formulário de voluntário com suas informações e disponibilidade.",
+      "Preencha os dados no formulário de inscrição e envie.",
   },
   {
     number: "03",
     title: "Aceitação via email",
     description:
-      "Nossa equipe entrará em contato pelo seu email para confirmar sua participação.",
+      "Nossa equipe irá analisar os dados de inscrição e, caso esteja tudo certo, retornaremos um email de confirmação!",
   },
   {
     number: "04",
     title: "Treinamento",
     description:
-      "Participe da capacitação e chegue preparado para fazer a diferença.",
+      "Pronto! Faça parte do nosso treinamento para se tornar um voluntário em nossos eventos!",
   },
 ];
 
@@ -32,89 +33,100 @@ export default function ProcessoVoluntario() {
   const [activeStep, setActiveStep] = useState(0);
 
   return (
-    <section className="w-full bg-[#FDF3EA] py-16 md:py-24">
-      <div className="w-full max-w-6xl mx-auto px-4">
+    <section className="w-full bg-[#FF6D2C] py-16 md:py-24">
+      <div className="w-full max-w-[1200px] mx-auto px-4 md:px-8">
         {/* Título */}
-        <div className="text-center mb-12">
-          <p className="text-[#1E1E1E] font-bold text-lg md:text-xl mb-1">
-            Processo para virar
-          </p>
+        <div className="text-center mb-16">
           <h2
-            className="font-handwriting text-[#FF6D2C] leading-none"
+            className="font-black text-[#2B2B2B] leading-none"
+            style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)" }}
+          >
+            Processo para virar
+          </h2>
+          <p
+            className="font-handwriting text-[#FDF3EA] mt-2"
             style={{ fontSize: "clamp(2.5rem, 6vw, 4rem)" }}
           >
             voluntário
-          </h2>
+          </p>
         </div>
 
         {/* Layout: steps + imagem */}
-        <div className="flex flex-col md:flex-row gap-10 md:gap-16 items-center">
+        <div className="flex flex-col md:flex-row gap-12 md:gap-20 items-center justify-between">
           {/* Lista de steps */}
-          <div className="flex-1 flex flex-col gap-0">
+          <div className="flex-1 flex flex-col w-full">
             {steps.map((step, index) => {
               const isActive = index === activeStep;
               return (
-                <button
+                <div
                   key={step.number}
-                  onClick={() => setActiveStep(index)}
-                  className="w-full text-left py-5 border-b border-[#1E1E1E]/10 last:border-b-0 group transition-all duration-300 focus:outline-none"
+                  onMouseEnter={() => setActiveStep(index)}
+                  onFocus={() => setActiveStep(index)}
+                  tabIndex={0}
+                  className="w-full flex items-start gap-5 cursor-pointer outline-none mb-6 group"
                 >
-                  <div className="flex items-baseline gap-4">
-                    {/* Número */}
+                  {/* Container do número e da linha */}
+                  <div className="flex flex-col items-center min-w-[2rem] pt-1">
                     <span
-                      className={`text-sm font-bold transition-colors duration-300 shrink-0 ${
-                        isActive ? "text-[#FF6D2C]" : "text-[#1E1E1E]/30"
+                      className={`font-handwriting text-xl transition-colors duration-300 ${
+                        isActive ? "text-[#FFD2A6]" : "text-[#FFD2A6]/50"
                       }`}
                     >
                       {step.number}
                     </span>
+                    {/* Linha vertical que aparece quando ativo */}
+                    <div
+                      className={`w-[1.5px] transition-all duration-500 bg-[#E4E4E4] mt-3 rounded-full ${
+                        isActive ? "h-16 opacity-100" : "h-0 opacity-0"
+                      }`}
+                    />
+                  </div>
 
-                    {/* Conteúdo */}
-                    <div className="flex flex-col gap-1">
-                      <span
-                        className={`font-semibold text-base md:text-lg transition-colors duration-300 ${
-                          isActive ? "text-[#1E1E1E]" : "text-[#1E1E1E]/40"
-                        }`}
-                      >
-                        {step.title}
-                      </span>
+                  {/* Conteúdo */}
+                  <div className="flex flex-col flex-1 pt-1 pb-2">
+                    <span
+                      className={`font-bold text-xl md:text-2xl transition-colors duration-300 ${
+                        isActive ? "text-[#FFFFFF]" : "text-[#2E2F35]/40 group-hover:text-[#2E2F35]/60"
+                      }`}
+                    >
+                      {step.title}
+                    </span>
 
-                      {/* Descrição — só visível no step ativo */}
-                      <div
-                        className={`overflow-hidden transition-all duration-500 ${
-                          isActive
-                            ? "max-h-24 opacity-100 mt-1"
-                            : "max-h-0 opacity-0"
-                        }`}
-                      >
-                        <p className="text-sm text-[#1E1E1E]/60 leading-relaxed">
-                          {step.description}
-                        </p>
-                      </div>
+                    {/* Descrição — só visível no step ativo */}
+                    <div
+                      className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                        isActive
+                          ? "max-h-40 opacity-100 mt-3"
+                          : "max-h-0 opacity-0"
+                      }`}
+                    >
+                      <p className="text-[15px] md:text-base text-[#E4E4E4] font-medium leading-relaxed pr-4 md:pr-12">
+                        {step.description}
+                      </p>
                     </div>
                   </div>
-                </button>
+                </div>
               );
             })}
 
             {/* CTA */}
-            <div className="mt-8">
+            <div className="mt-8 ml-12">
               <Link
                 to="/voluntarios"
-                className="inline-block bg-[#FF6D2C] hover:bg-[#e65c18] transition-colors text-white font-bold px-7 py-3 rounded-sm uppercase tracking-wider text-sm shadow-md"
+                className="inline-block bg-[#2B2B2B] hover:bg-black transition-all text-white font-bold px-8 py-3 rounded-2xl uppercase tracking-wider text-xs border-[2.5px] border-[#2B2B2B] shadow-[4px_4px_0_rgba(0,0,0,0.5)] active:translate-y-1 active:shadow-none"
               >
-                Quero ser um voluntário
+                QUERO SER UM VOLUNTÁRIO
               </Link>
             </div>
           </div>
 
           {/* Imagem */}
-          <div className="w-full md:w-[340px] lg:w-[380px] shrink-0">
-            <div className="rounded-2xl overflow-hidden shadow-lg">
+          <div className="w-full md:w-[400px] lg:w-[450px] shrink-0">
+            <div className="rounded-[2rem] overflow-hidden shadow-xl border-4 border-transparent">
               <img
-                src="/images/voluntario-processo.jpg"
+                src={processoImg}
                 alt="Voluntários IDB Jovem"
-                className="w-full h-[340px] md:h-[420px] object-cover"
+                className="w-full h-[400px] md:h-[500px] object-cover"
               />
             </div>
           </div>
