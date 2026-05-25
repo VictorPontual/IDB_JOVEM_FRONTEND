@@ -1,47 +1,90 @@
 import { Link } from "react-router-dom";
+import { useEffect, useRef } from "react";
+import galeria1Img from "../../../assets/images/galeria1.png";
+import galeria2Img from "../../../assets/images/galeria2.png";
+import galeria3Img from "../../../assets/images/galeria3.png";
+import galeria4Img from "../../../assets/images/galeria4.png";
+
+const tempGallery = [
+  { id: 1, image: galeria1Img },
+  { id: 2, image: galeria2Img },
+  { id: 3, image: galeria3Img },
+  { id: 4, image: galeria4Img },
+];
 
 export default function GaleriaSection({ gallery = [] }) {
+  const displayGallery = tempGallery;
+  const scrollRef = useRef(null);
+
+  useEffect(() => {
+    const scrollContainer = scrollRef.current;
+    if (!scrollContainer) return;
+
+    const intervalId = setInterval(() => {
+      if (scrollContainer) {
+        const childWidth = scrollContainer.children[0]?.clientWidth || 0;
+        const gap = 24; // Equivalente a gap-6
+
+        // Se chegou ao fim ou perto do fim
+        if (
+          scrollContainer.scrollLeft + scrollContainer.clientWidth >=
+          scrollContainer.scrollWidth - 10
+        ) {
+          scrollContainer.scrollTo({ left: 0, behavior: "smooth" });
+        } else {
+          scrollContainer.scrollBy({
+            left: childWidth + gap,
+            behavior: "smooth",
+          });
+        }
+      }
+    }, 3000);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
   return (
-    <section className="w-full bg-white py-16 md:py-24">
-      <div className="w-full max-w-6xl mx-auto px-4">
+    <section className="w-full bg-[#DC6803] py-16 md:py-24">
+      <div className="w-full max-w-[1400px] mx-auto">
         {/* Cabeçalho */}
-        <div className="text-center mb-10">
+        <div className="text-center mb-16 px-4">
           <h2
-            className="font-bold text-neutral-900"
-            style={{ fontSize: "clamp(1.6rem, 4vw, 2.4rem)" }}
+            className="font-black leading-tight"
+            style={{ fontSize: "clamp(2.5rem, 5vw, 4.5rem)" }}
           >
-            Galeria de fotos{" "}
-            <em className="not-italic text-orange-500 font-handwriting" style={{ fontSize: "clamp(1.8rem, 4.5vw, 2.8rem)" }}>
+            <span className="text-[#93370D]">Galeria de fotos</span>{" "}
+            <em className="not-italic text-white font-handwriting" style={{ fontSize: "clamp(3rem, 6vw, 5.5rem)" }}>
               dos eventos
             </em>
           </h2>
         </div>
 
-        {/* Grid de fotos */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 md:gap-4">
-          {gallery.slice(0, 6).map((item, index) => (
+        {/* Lista de fotos (Scroll horizontal) */}
+        <div
+          ref={scrollRef}
+          className="flex overflow-x-auto snap-x snap-mandatory gap-4 md:gap-6 px-4 md:px-8 pb-8 no-scrollbar"
+        >
+          {displayGallery.map((item) => (
             <div
               key={item.id}
-              className={`overflow-hidden rounded-sm ${
-                index === 0 ? "col-span-2 sm:col-span-1" : ""
-              }`}
+              className="snap-center shrink-0 w-[85vw] sm:w-[45vw] md:w-[32vw] overflow-hidden rounded-sm"
             >
               <img
                 src={item.image}
-                alt={`${item.event} ${item.year}`}
-                className="w-full h-44 md:h-52 object-cover hover:scale-105 transition-transform duration-500"
+                alt="Galeria"
+                className="w-full h-[300px] md:h-[400px] object-cover"
               />
             </div>
           ))}
         </div>
 
         {/* CTA */}
-        <div className="mt-10 text-center">
+        <div className="mt-8 text-center px-4">
           <Link
             to="/galeria"
-            className="inline-block bg-orange-500 hover:bg-orange-600 transition-colors text-white font-bold px-8 py-3 rounded-sm uppercase tracking-wider text-sm shadow-lg"
+            className="inline-block bg-white text-[#DC6803] hover:bg-neutral-100 transition-colors font-semibold px-10 py-3 rounded-full text-lg shadow-sm"
           >
-            Ver mais →
+            Ver mais +
           </Link>
         </div>
       </div>

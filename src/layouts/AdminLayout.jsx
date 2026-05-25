@@ -1,14 +1,11 @@
-import { Navigate, Outlet } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
+import { Outlet } from "react-router-dom";
 import AdminSidebar from "../pages/Admin/components/AdminSidebar";
 
+/**
+ * Layout administrativo — puramente visual.
+ * A proteção de rota (auth) é feita pelo AdminRoute.
+ */
 export default function AdminLayout() {
-  const { isAuthenticated, isAdmin } = useAuth();
-
-  if (!isAuthenticated || !isAdmin) {
-    return <Navigate to="/login" replace />;
-  }
-
   return (
     <div className="flex min-h-screen bg-[#FDF3EA]">
       <AdminSidebar />

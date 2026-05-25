@@ -1,3 +1,8 @@
+import imgEvento1 from "../assets/images/evento1.png";
+import imgEvento2 from "../assets/images/evento2.png";
+import imgEvento3 from "../assets/images/evento3.png";
+import imgEvento4 from "../assets/images/evento4.png";
+
 export const mockEvents = [
   {
     id: 1,
@@ -6,7 +11,7 @@ export const mockEvents = [
     date: "2026-07-10T08:00:00",
     endDate: "2026-07-10T22:00:00",
     location: "FGA",
-    image: "/images/galeria/idb-jovem-one.jpg",
+    image: imgEvento1,
     description: "Breve descrição do evento",
     category: "Encontro",
     featured: true,
@@ -33,7 +38,7 @@ export const mockEvents = [
     date: "2026-07-10T09:00:00",
     endDate: "2026-07-10T18:00:00",
     location: "São Paulo, SP",
-    image: "/images/galeria/idb-jovem-one.jpg",
+    image: imgEvento2,
     description: "Um encontro único para jovens que buscam crescimento espiritual.",
     category: "Conferência",
     featured: false,
@@ -53,7 +58,7 @@ export const mockEvents = [
     date: "2026-07-10T07:00:00",
     endDate: "2026-07-12T20:00:00",
     location: "Campinas, SP",
-    image: "/images/galeria/idb-teen-camp.jpg",
+    image: imgEvento3,
     description: "O melhor acampamento teen do ano.",
     category: "Camp",
     featured: false,
@@ -73,7 +78,7 @@ export const mockEvents = [
     date: "2026-07-10T08:00:00",
     endDate: "2026-07-10T22:00:00",
     location: "Brasília, DF",
-    image: "/images/galeria/es-ne-ajo.jpg",
+    image: imgEvento4,
     description: "Conferência regional de jovens do centro-oeste.",
     category: "Conferência",
     featured: false,
